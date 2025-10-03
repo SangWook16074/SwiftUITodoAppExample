@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = TodoViewModel(todoRepository: TodoRepositoryImpl())
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            TodoListView(todoViewModel: viewModel)
         }
-        .padding()
     }
 }
 

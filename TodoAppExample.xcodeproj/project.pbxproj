@@ -32,8 +32,8 @@
 		5B73E3132E8FA70C00B2A9F6 = {
 			isa = PBXGroup;
 			children = (
-				5B73E31E2E8FA70C00B2A9F6 /* TodoAppExample */,
 				5B73E31D2E8FA70C00B2A9F6 /* Products */,
+				5B73E31E2E8FA70C00B2A9F6 /* TodoAppExample */,
 			);
 			sourceTree = "<group>";
 		};
