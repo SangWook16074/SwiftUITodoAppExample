@@ -2,15 +2,30 @@ import Foundation
 
 protocol TodoRepository {
     func getTodos() async throws -> [Todo]
+    func addTodo(title: String, content: String) async throws
+    func updateTodo(_ todo: Todo) async throws
+    func deleteTodo(id: UUID) async throws
 }
 
-final class TodoRepositoryImpl : TodoRepository {
+final class TodoRepositoryImpl: TodoRepository {
+    private let service: LocalTodoService
+    init(service: LocalTodoService) { self.service = service }
+
     func getTodos() async throws -> [Todo] {
-        try await Task.sleep(for: .seconds(3))
-        return [
-            Todo(id: UUID(), title: "Todo 1", content: "Todo 1입니다."),
-            Todo(id: UUID(), title: "Todo 2", content: "Todo 2입니다."),
-            Todo(id: UUID(), title: "Todo 3", content: "Todo 3입니다."),
-        ]
+        return try await service.getTodoItems()
+    }
+
+    func addTodo(title: String, content: String) async throws {
+        let newId = UUID()
+        try await service.addTodoItem(id: newId, title: title, content: content)
+    }
+    
+    func updateTodo(_ todo: Todo) async throws {
+        guard let id = todo.id else { return } 
+        try await service.updateTodoItem(id: id, newTitle: todo.title ?? "", newContent: todo.content ?? "")
+    }
+    
+    func deleteTodo(id: UUID) async throws {
+        try await service.deleteTodoItem(id: id)
     }
 }
