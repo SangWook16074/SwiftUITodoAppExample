@@ -8,6 +8,10 @@ class TodoViewModel : ObservableObject {
     
     init(todoRepository : TodoRepository) { self.todoRepository = todoRepository }
     
+}
+
+extension TodoViewModel {
+    
     @MainActor
     public func getTodos() async {
         do {

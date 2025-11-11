@@ -11,11 +11,14 @@ protocol LocalTodoService {
 class LocalTodoServiceImpl: LocalTodoService {
     private let context: NSManagedObjectContext
     init(context: NSManagedObjectContext) { self.context = context }
-
+    
     private func saveContext() throws {
         if context.hasChanges { try context.save() }
     }
+    
+}
 
+extension LocalTodoServiceImpl {
     func getTodoItems() async throws -> [Todo] {
         try await context.perform {
             let fetchRequest = Todo.fetchRequest()

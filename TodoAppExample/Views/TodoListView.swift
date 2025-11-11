@@ -1,5 +1,6 @@
 import SwiftUI
 
+
 struct TodoListView : View {
     @ObservedObject var todoViewModel: TodoViewModel
     @State private var showingAddTodoView = false
@@ -8,14 +9,9 @@ struct TodoListView : View {
         List {
             ForEach(todoViewModel.todos) { todo in
                 NavigationLink(destination: EditTodoView(todo: todo, viewModel: todoViewModel)) {
-                    VStack(alignment: .leading) {
-                        Text(todo.title ?? "Untitled")
-                            .font(.headline)
-                        
-                        Text(todo.content ?? "")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
+                
+                        TodoRow(todo: todo)
+                    
                 }
             }
             .onDelete(perform: todoViewModel.deleteTodo)

@@ -10,7 +10,9 @@ protocol TodoRepository {
 final class TodoRepositoryImpl: TodoRepository {
     private let service: LocalTodoService
     init(service: LocalTodoService) { self.service = service }
+}
 
+extension TodoRepositoryImpl {
     func getTodos() async throws -> [Todo] {
         return try await service.getTodoItems()
     }
